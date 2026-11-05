@@ -1368,21 +1368,3 @@ python3 tests_api/run_all.py       # 44 项（本机 11~16s），起一个随机
 | `docs/DESIGN_NOTES.md` | 为什么代码优先、为什么断言在核心库、为什么修复要先确定性诊断、为什么指标在 Python 侧算、为什么用 stdlib、这个项目不做什么 |
 | `docs/COMPETITIVE.md` | 竞品分析（LTspice / SKiDL / Celus / JITX / AnalogCoder …）与差异化定位 |
 | `docs/_examples/` | M1 时期两次真实运行的完整输出存档（结论数字仍对得上；其中的网表是旧的固定 1Hz~100MHz 扫频卡，现在由 `ac_sweep()` 按设计频率生成） |
-
----
-
-## 这个项目是什么
-
-对着 LTspice、SKiDL、Celus、JITX、AnalogCoder 逐项比过之后（见 `docs/COMPETITIVE.md`），
-一句话是这么定位的：
-
-> **不是「另一个电路仿真器」，而是设计意图的验证层 + 会说「不」的 AI。**
-
-- 对着 LTspice：我比它快，而且帮你算成品率；
-- 对着 SKiDL：我不只生成网表，我验证它（`c.expect` + `c.lint` + 电路图投影）；
-- 对着「AI 生成电路」那类工具：我不只生成，**测不到就返回 `None`、不达标就判失败**，
-  拒绝交付比交付错的东西更有价值。
-
-边界也写在纸面上：12 类器件（R/C/L/V/I/运放/D/Q/M/脉冲/正弦/开关）、Level-1 MOS、行为级运放、
-没有噪声 / THD / 温度 / 寄生，
-**不做 PCB 与布局布线**——它现在是「教学 / 快速估算 / 方案预研」级工具，不是签核工具。
